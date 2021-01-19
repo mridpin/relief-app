@@ -15,10 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from api.views import VideoView
+from api.views import HistoryView
+from api.views import BookmarkView
 
 urlpatterns = [
     path('api-auth/', include('rest_framework.urls')),
     path('admin/', admin.site.urls),
-    path('', VideoView.as_view(), name="default"),
+    path('history/', HistoryView.as_view(), name="history"),
+    path('bookmark/', BookmarkView.as_view(), name="bookmark"),
 ]
