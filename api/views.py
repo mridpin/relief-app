@@ -18,7 +18,7 @@ class HistoryView(APIView):
 
     # Post history
     def post(self, request, *args, **kwargs):
-        print(str(request.data))
+        serializer = HistorySerializer(data=request.data)
         if (serializer.is_valid()):
             serializer.save()
             return Response(serializer.data)
