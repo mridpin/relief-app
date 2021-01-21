@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import JsonResponse,HttpResponse,HttpResponseBadRequest
 
 from rest_framework.views import APIView
@@ -37,4 +37,9 @@ class BookmarkView(APIView):
         if (serializer.is_valid()):
             serializer.save()
             return Response(serializer.data)
-        return HttpResponseBadRequest(serializer.errors)        
+        return HttpResponseBadRequest(serializer.errors)
+
+    def delete(self, request, *args, **kwargs):
+        instance = get_object_or_404(Bookmark, url=request.data["url"])
+        instance.delete()
+        return Response(status=200)
